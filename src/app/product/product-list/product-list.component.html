@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col">
+        <div class="table-responsive" >
+            <table class="table" *ngIf="products$ | async as products">
+                <thead>
+                    <tr>
+                        <th>product Id</th>
+                        <th>product name</th>
+                        <th>description</th>
+                        <th>unit price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <td>{{product.id}}</td>
+                        <td>{{product.productName}}</td>
+                        <td>{{product.description}}</td>
+                        <td>{{product.unitPrice}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col">
+            <button class="btn btn-primary" (click)="printPdf()" [disabled]="pdfUrl === ''">print</button>
+            <button class="btn btn-primary" (click)="previewPdf()" [disabled]="pdfUrl" >preview</button>
+    </div>
+</div>
+<div class="row" *ngIf="pdfUrl">
+   
+    <pdf-viewer [src]="pdfUrl"
+    [render-text]="true"
+    [original-size]="false"
+    style="width: 1000px; height: 500px"
+></pdf-viewer>
+</div>
+
